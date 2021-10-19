@@ -8,7 +8,6 @@ class HymnsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _scrollController = FixedExtentScrollController();
     return FutureBuilder(
       future:
           DefaultAssetBundle.of(context).loadString('assets/hymns/hymns.json'),

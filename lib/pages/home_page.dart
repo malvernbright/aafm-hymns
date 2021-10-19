@@ -15,14 +15,6 @@ class HomePage extends StatelessWidget {
       'Likes',
       style: optionStyle,
     ),
-    Text(
-      'Search',
-      style: optionStyle,
-    ),
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
   ];
 
   const HomePage({Key? key}) : super(key: key);
@@ -69,14 +61,6 @@ class HomePage extends StatelessWidget {
                     GButton(
                       icon: LineIcons.heart,
                       text: 'Likes',
-                    ),
-                    GButton(
-                      icon: LineIcons.search,
-                      text: 'Search',
-                    ),
-                    GButton(
-                      icon: LineIcons.user,
-                      text: 'Profile',
                     ),
                   ],
                   selectedIndex: provider.selectedIndex,

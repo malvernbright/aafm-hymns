@@ -1,4 +1,5 @@
 import 'package:aafm_hymns/providers/hymn_provider.dart';
+import 'package:aafm_hymns/widgets/floating_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,7 @@ class Hymn extends StatelessWidget {
       builder: (context, provider, child) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(title),
+            title: SelectableText(title),
             leading: IconButton(
               icon: const Icon(
                 Icons.keyboard_arrow_left,
@@ -23,25 +24,15 @@ class Hymn extends StatelessWidget {
               onPressed: () => Navigator.of(context).pop(),
             ),
           ),
-          floatingActionButton: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                  tooltip: 'Increase Font Size',
-                  icon:
-                      const Icon(Icons.add, size: 35, color: Colors.blueAccent),
-                  onPressed: () => provider.increaseFontSize()),
-              IconButton(
-                  tooltip: 'Reduce Font Size',
-                  icon: const Icon(Icons.remove,
-                      size: 35, color: Colors.redAccent),
-                  onPressed: () => provider.reduceFontSize()),
-            ],
-          ),
-          body: SingleChildScrollView(
-            child: Text(
-              hymn,
-              style: TextStyle(fontSize: provider.myFontSize),
+          floatingActionButton: const FloatingButton(),
+          body: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: SingleChildScrollView(
+              child: SelectableText(
+                hymn,
+                style: TextStyle(fontSize: provider.myFontSize),
+              ),
             ),
           ),
         );

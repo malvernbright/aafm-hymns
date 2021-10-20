@@ -1,13 +1,19 @@
 import 'package:aafm_hymns/providers/hymn_provider.dart';
+import 'package:aafm_hymns/utils/constants.dart';
 import 'package:aafm_hymns/widgets/floating_button.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 class Hymn extends StatelessWidget {
-  const Hymn({Key? key, required this.title, required this.hymn})
+  const Hymn(
+      {Key? key, required this.title, required this.hymn, required this.index})
       : super(key: key);
   final String title;
   final String hymn;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +22,14 @@ class Hymn extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: SelectableText(title),
+            actions: [
+              IconButton(
+                  onPressed: () => provider.addToFavorites(
+                      title: title, hymn: hymn, index: index),
+                  icon: LineIcon(Hive.box(favourites).containsKey(index)
+                      ? LineIcons.heartAlt
+                      : LineIcons.heart))
+            ],
             leading: IconButton(
               icon: const Icon(
                 Icons.keyboard_arrow_left,

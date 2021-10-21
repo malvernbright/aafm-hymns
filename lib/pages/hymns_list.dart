@@ -18,66 +18,66 @@ class HymnsList extends StatelessWidget {
         future: Hive.openBox(favourites),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return FutureBuilder(
-              future: DefaultAssetBundle.of(context)
-                  .loadString('assets/hymns/hymns.json'),
-              builder: (context, snapshot) {
-                var hymnData = json.decode(snapshot.data.toString());
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return Consumer<HymnProvider>(
-                    builder: (context, provider, child) {
-                      return ListView.builder(
-                        itemCount: hymnData.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                child: Text(
-                                  '${index + 1}',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
+            return Consumer<HymnProvider>(
+              builder: (context, provider, child) {
+                return FutureBuilder(
+                    future: provider.readJson(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                          itemCount: provider.hymns.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Card(
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  child: Text(
+                                    '${index + 1}',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white),
+                                  ),
+                                  backgroundColor: Colors.pink,
                                 ),
-                                backgroundColor: Colors.pink,
-                              ),
-                              title: Text('${hymnData[index]['title']}'),
-                              onTap: () =>
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => Hymn(
-                                            title:
-                                                '${hymnData[index]['title']}',
-                                            hymn: '${hymnData[index]['hymn']}',
-                                            index: index,
-                                          ))),
-                              trailing: GestureDetector(
-                                onTap: () => provider.addToFavorites(
-                                    title: hymnData[index]['title'],
-                                    hymn: hymnData[index]['hymn'],
-                                    index: index),
-                                child: LineIcon(
-                                  Hive.box(favourites).containsKey(index)
-                                      ? LineIcons.heartAlt
-                                      : LineIcons.heart,
-                                  color: Colors.pink,
+                                title:
+                                    Text('${provider.hymns[index]['title']}'),
+                                onTap: () => Navigator.of(context)
+                                    .push(MaterialPageRoute(
+                                        builder: (_) => Hymn(
+                                              title:
+                                                  '${provider.hymns[index]['title']}',
+                                              hymn:
+                                                  '${provider.hymns[index]['hymn']}',
+                                              index: index,
+                                            ))),
+                                trailing: GestureDetector(
+                                  onTap: () => provider.addToFavorites(
+                                      title: provider.hymns[index]['title'],
+                                      hymn: provider.hymns[index]['hymn'],
+                                      index: index,
+                                      context: context),
+                                  child: LineIcon(
+                                    Hive.box(favourites).containsKey(index)
+                                        ? LineIcons.heartAlt
+                                        : LineIcons.heart,
+                                    color: Colors.pink,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  );
-                } else if (snapshot.connectionState ==
-                    ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return const Center(child: CircularProgressIndicator());
+                            );
+                          },
+                        );
+                      } else if (snapshot.hasError) {
+                        return const Icon(Icons.error_outline);
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    });
               },
             );
           } else if (snapshot.hasError) {
-            return Icon(Icons.error_outline);
+            return const Icon(Icons.error_outline);
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
         });
   }

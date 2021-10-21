@@ -15,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
     var _duration = const Duration(seconds: 5);
+
     return Timer(_duration, navigationPage);
   }
 
@@ -27,15 +28,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Lottie.asset('assets/animations/intro.json'),
-        ),
+      body: Center(
+        child: Lottie.asset('assets/animations/intro.json'),
       ),
     );
   }
 
   void navigationPage() {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Remember to turn focus mode on! Avoid disruptions 🙂'),
+    ));
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const HomePage()));
   }

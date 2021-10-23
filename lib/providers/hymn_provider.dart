@@ -1,19 +1,39 @@
 import 'dart:convert';
 
 import 'package:aafm_hymns/models/favourites.dart';
+import 'package:aafm_hymns/models/hymn_model.dart';
 import 'package:aafm_hymns/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 
 class HymnProvider with ChangeNotifier {
-  double myFontSize = 12.0;
-  TextEditingController editingController = TextEditingController();
-  List itemSearch = [];
-
+  double myFontSize = 14.0;
+  TextEditingController searchController = TextEditingController();
+  List<HymnsModel> users = [];
+  List<HymnsModel> filteredUsers = [];
   int selectedIndex = 0;
 
-  bool darkModeBoxChecked = false;
+  Future<List<HymnsModel>> readJsonData() async {
+    // Read json file to list
+    final jsonData = await rootBundle.loadString('assets/hymns/hymns.json');
+    final list = json.decode(jsonData) as List<dynamic>;
+
+    return list.map((e) => HymnsModel.fromJson(e)).toList();
+  }
+
+  void onSearchChanged(String value) {
+    if (value.isEmpty) {
+      filteredUsers = users;
+    } else {
+      filteredUsers = users
+          .where((u) => (u.id.toString().contains(value) ||
+              u.title!.toLowerCase().contains(value.toLowerCase()) ||
+              u.hymn!.toLowerCase().contains(value.toLowerCase())))
+          .toList();
+    }
+    notifyListeners();
+  }
 
   void increaseFontSize() {
     myFontSize++;
@@ -47,18 +67,6 @@ class HymnProvider with ChangeNotifier {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('You\'ve added $title to your favourites list')));
 
-      notifyListeners();
-    }
-  }
-
-  void darkMode() async {
-    var box = await Hive.openBox(darkModeBox);
-    if (box.containsKey('darkMode')) {
-      darkModeBoxChecked = !darkModeBoxChecked;
-      box.put('darkMode', darkModeBoxChecked);
-      notifyListeners();
-    } else {
-      box.delete('darkMode');
       notifyListeners();
     }
   }

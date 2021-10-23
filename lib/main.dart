@@ -26,8 +26,8 @@ void main() async {
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
               .copyWith(secondary: Colors.pink),
           textSelectionTheme: TextSelectionThemeData(
-              selectionColor: Colors.pink.shade200,
-              selectionHandleColor: Colors.pink.shade200)),
+              selectionColor: Colors.pink.shade500,
+              selectionHandleColor: Colors.pink.shade500)),
       home: const SplashScreen(),
     ),
   ));

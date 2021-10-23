@@ -10,3 +10,4 @@ class FavouriteHymns extends HiveObject {
 
   FavouriteHymns(this.title, this.hymn);
 }
+//flutter packages pub run build_runner build

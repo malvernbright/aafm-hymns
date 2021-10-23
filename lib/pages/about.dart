@@ -10,6 +10,7 @@ class About extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
+        width: MediaQuery.of(context).size.width * .9,
         decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(

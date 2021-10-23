@@ -1,7 +1,4 @@
 import 'dart:io';
-
-import 'package:aafm_hymns/pages/drawer.dart';
-import 'package:aafm_hymns/pages/home_page.dart';
 import 'package:aafm_hymns/pages/splash_screen.dart';
 import 'package:aafm_hymns/providers/hymn_provider.dart';
 import 'package:aafm_hymns/utils/constants.dart';

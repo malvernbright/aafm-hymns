@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 import 'package:aafm_hymns/models/favourites.dart';
-import 'package:aafm_hymns/models/menu_items.dart';
 import 'package:aafm_hymns/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:hive/hive.dart';
 
 class HymnProvider with ChangeNotifier {
@@ -26,12 +24,6 @@ class HymnProvider with ChangeNotifier {
     myFontSize--;
     notifyListeners();
   }
-
-  // selectedIndex: _selectedIndex,
-  // onTabChange: (index) {
-  // setState(() {
-  // _selectedIndex = index;
-  // });
 
   void onTabChanged(int index) {
     selectedIndex = index;
@@ -69,20 +61,5 @@ class HymnProvider with ChangeNotifier {
       box.delete('darkMode');
       notifyListeners();
     }
-  }
-
-  Future<bool> checkFavourite(int index) async {
-    if (Hive.box(favourites).containsKey(index)) return true;
-    return false;
-  }
-
-  List hymns = [];
-  Future<List> readJson() async {
-    final String response =
-        await rootBundle.loadString('assets/hymns/hymns.json');
-    final data = await json.decode(response);
-    hymns = data['items'];
-    return hymns;
-    // notifyListeners();
   }
 }

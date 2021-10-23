@@ -32,7 +32,7 @@ class Favourites extends StatelessWidget {
                                     builder: (_) => Hymn(
                                           title: hymns.title,
                                           hymn: hymns.hymn,
-                                          index: index,
+                                          // index: index,
                                         ))),
                           ),
                         );

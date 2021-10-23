@@ -4,7 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
-import 'drawer.dart';
+import 'about.dart';
 import 'favourite_hymns.dart';
 import 'hymns_list.dart';
 
@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
   static const List<Widget> _widgetOptions = <Widget>[
     HymnsList(),
     Favourites(),
+    About(),
   ];
 
   const HomePage({Key? key}) : super(key: key);
@@ -23,12 +24,6 @@ class HomePage extends StatelessWidget {
     return Consumer<HymnProvider>(
       builder: (context, provider, child) {
         return Scaffold(
-          drawer: const MyDrawer(),
-          appBar: AppBar(
-            elevation: 10,
-            title: const Text('AAFM HYMNS'),
-          ),
-          backgroundColor: Colors.white,
           body: Center(
             child: _widgetOptions.elementAt(provider.selectedIndex),
           ),
@@ -65,6 +60,10 @@ class HomePage extends StatelessWidget {
                     GButton(
                       icon: LineIcons.heart,
                       text: 'Likes',
+                    ),
+                    GButton(
+                      icon: LineIcons.infoCircle,
+                      text: 'About',
                     ),
                   ],
                   selectedIndex: provider.selectedIndex,

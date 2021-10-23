@@ -3,8 +3,8 @@ import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 
-class MyDrawer extends StatelessWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+class About extends StatelessWidget {
+  const About({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,10 @@ class MyDrawer extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(10),
                 bottomRight: Radius.circular(10))),
-        width: MediaQuery.of(context).size.width * .75,
+        // width: MediaQuery.of(context).size.width * .75,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           children: [
             const UserAccountsDrawerHeader(
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),

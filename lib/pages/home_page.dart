@@ -6,6 +6,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 import 'about.dart';
+import 'favourite_hymns.dart';
 import 'hymns_list.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,7 +14,7 @@ class HomePage extends StatelessWidget {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
     HymnsList(),
-    // Favourites(),
+    Favourites(),
     About(),
   ];
 
@@ -59,10 +60,10 @@ class HomePage extends StatelessWidget {
                         icon: LineIcons.school,
                         text: 'Hymns',
                       ),
-                      // GButton(
-                      //   icon: LineIcons.heart,
-                      //   text: 'Likes',
-                      // ),
+                      GButton(
+                        icon: LineIcons.heart,
+                        text: 'Likes',
+                      ),
                       GButton(
                         icon: LineIcons.infoCircle,
                         text: 'About',

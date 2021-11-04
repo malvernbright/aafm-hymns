@@ -1,2 +1,2 @@
-const favourites = 'favourite_hymns';
+const favourites = 'favourite_hymnals';
 const darkModeBox = 'darkMode';

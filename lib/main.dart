@@ -13,7 +13,7 @@ void main() async {
   Directory documents = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(documents.path);
   Hive.registerAdapter(FavouriteHymnsAdapter());
-  await Hive.openBox(darkModeBox);
+  // await Hive.openBox(darkModeBox);
   await Hive.openBox(favourites);
   runApp(ChangeNotifierProvider(
     create: (BuildContext context) => HymnProvider(),

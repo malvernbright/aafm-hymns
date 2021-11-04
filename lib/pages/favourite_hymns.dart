@@ -14,31 +14,36 @@ class Favourites extends StatelessWidget {
         future: Hive.openBox(favourites),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return ValueListenableBuilder(
-              valueListenable: Hive.box(favourites).listenable(),
-              builder: (context, Box favouritesBox, _) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ListView.builder(
-                      itemCount: favouritesBox.length,
-                      itemBuilder: (context, index) {
-                        final hymns =
-                            favouritesBox.getAt(index) as FavouriteHymns;
-                        return Card(
-                          child: ListTile(
-                            title: Text(hymns.title.toString()),
-                            onTap: () =>
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => Hymn(
-                                          title: hymns.title,
-                                          hymn: hymns.hymn,
-                                          // index: index,
-                                        ))),
-                          ),
-                        );
-                      }),
-                );
-              },
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Favourites'),
+              ),
+              body: ValueListenableBuilder(
+                valueListenable: Hive.box(favourites).listenable(),
+                builder: (context, Box favouritesBox, _) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ListView.builder(
+                        itemCount: favouritesBox.length,
+                        itemBuilder: (context, index) {
+                          final hymns =
+                              favouritesBox.getAt(index) as FavouriteHymns;
+                          return Card(
+                            child: ListTile(
+                              title: Text(hymns.title.toString()),
+                              onTap: () =>
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => Hymn(
+                                            title: hymns.title,
+                                            hymn: hymns.hymn, id: hymns.id,
+                                            // index: index,
+                                          ))),
+                            ),
+                          );
+                        }),
+                  );
+                },
+              ),
             );
           } else if (snapshot.hasError) {
             return const Center(child: Icon(Icons.error_outline));

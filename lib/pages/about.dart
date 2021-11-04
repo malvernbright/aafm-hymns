@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -26,33 +25,93 @@ class About extends StatelessWidget {
                 arrowColor: Colors.pink,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        fit: BoxFit.fill,
+                        fit: BoxFit.fitWidth,
                         image: AssetImage('assets/images/logo.jpg'))),
                 accountName: Text('AAFM Hymns'),
                 accountEmail: Text('')),
+            const AboutCard(
+                icon: LineIcons.church,
+                cardText: 'Central Tabernacle & HQ',
+                subtitle: 'Stand No. 10369\nZororo Section, Highfield'),
             Card(
+              child: GestureDetector(
                 child: ListTile(
-              leading: LineIcon(LineIcons.code),
-              title: const Text('Made with ♡ and lots of 🍵 by Malvern Gondo'),
-            )),
-            Card(
-              child: ListTile(
-                leading: LineIcon(LineIcons.phone),
-                title: const SelectableLinkify(
-                  text: '+263 712 772 812',
-                ),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: LineIcon(LineIcons.envelope),
-                title: const SelectableLinkify(
-                    text: 'malvern@malvernbright.co.zw'),
+                    leading: LineIcon(LineIcons.code),
+                    title: const Text('Developer')),
+                onTap: () {
+                  buildShowBottomSheet(context);
+                },
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  PersistentBottomSheetController<dynamic> buildShowBottomSheet(
+      BuildContext context) {
+    return showBottomSheet(
+        context: context,
+        builder: (_) => Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              decoration: const BoxDecoration(
+                  color: Colors.pinkAccent,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(10),
+                  )),
+              child: ListView(
+                shrinkWrap: true,
+                primary: false,
+                children: [
+                  const AboutCard(
+                    icon: LineIcons.phone,
+                    cardText: '+263 712 772 812',
+                    subtitle: '',
+                  ),
+                  const AboutCard(
+                    icon: LineIcons.envelopeAlt,
+                    cardText: 'malvern@malvernbright.co.zw',
+                    subtitle: '',
+                  ),
+                  const AboutCard(
+                    icon: LineIcons.googleLogo,
+                    cardText: 'https://malvernbright.co.zw',
+                    subtitle: '',
+                  ),
+                  ButtonBar(
+                    children: [
+                      MaterialButton(
+                          color: Colors.white,
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Dismiss'))
+                    ],
+                  )
+                ],
+              ),
+            ));
+  }
+}
+
+class AboutCard extends StatelessWidget {
+  const AboutCard({
+    Key? key,
+    required this.icon,
+    required this.cardText,
+    required this.subtitle,
+  }) : super(key: key);
+  final IconData icon;
+  final String cardText;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        child: ListTile(
+      leading: LineIcon(icon),
+      title: Text(cardText),
+      subtitle: Text(subtitle),
+    ));
   }
 }

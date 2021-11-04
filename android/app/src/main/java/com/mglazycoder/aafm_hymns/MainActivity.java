@@ -1,4 +1,4 @@
-package com.example.aafm_hymns;
+package com.mglazycoder.aafm_hymns;
 
 import io.flutter.embedding.android.FlutterActivity;
 

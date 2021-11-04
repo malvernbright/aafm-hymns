@@ -4,10 +4,12 @@ part 'favourites.g.dart';
 @HiveType(typeId: 0)
 class FavouriteHymns extends HiveObject {
   @HiveField(0)
-  String title;
+  int id;
   @HiveField(1)
+  String title;
+  @HiveField(2)
   String hymn;
 
-  FavouriteHymns(this.title, this.hymn);
+  FavouriteHymns(this.id, this.title, this.hymn);
 }
 //flutter packages pub run build_runner build

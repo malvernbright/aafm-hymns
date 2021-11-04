@@ -1,14 +1,17 @@
 import 'package:aafm_hymns/providers/hymn_provider.dart';
+import 'package:aafm_hymns/utils/constants.dart';
 import 'package:aafm_hymns/widgets/floating_button.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
 
 class Hymn extends StatelessWidget {
+  final int id;
   final String title;
   final String hymn;
-  const Hymn({Key? key, required this.title, required this.hymn})
+  const Hymn(
+      {Key? key, required this.title, required this.hymn, required this.id})
       : super(key: key);
 
   @override
@@ -18,6 +21,17 @@ class Hymn extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(title),
+            actions: [
+              IconButton(
+                  onPressed: () => provider.addToFavorites(
+                      hymn: hymn, title: title, context: context, id: id),
+                  icon: Icon(
+                    Hive.box(favourites).containsKey(id)
+                        ? LineIcons.heartAlt
+                        : LineIcons.heart,
+                    color: Colors.white,
+                  ))
+            ],
           ),
           body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

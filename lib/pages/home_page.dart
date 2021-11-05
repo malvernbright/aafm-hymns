@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
             ),
             bottomNavigationBar: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.green,
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 20,
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                         horizontal: 20, vertical: 12),
                     duration: const Duration(milliseconds: 400),
                     tabBackgroundColor: Colors.grey[100]!,
-                    color: Colors.black,
+                    color: Colors.white,
                     tabs: const [
                       GButton(
                         icon: LineIcons.school,

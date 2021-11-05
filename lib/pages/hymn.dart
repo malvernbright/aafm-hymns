@@ -1,10 +1,8 @@
 import 'package:aafm_hymns/providers/hymn_provider.dart';
-import 'package:aafm_hymns/utils/constants.dart';
+import 'package:aafm_hymns/widgets/action_bar_icon.dart';
 import 'package:aafm_hymns/widgets/floating_button.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
-import 'package:hive/hive.dart';
 
 class Hymn extends StatelessWidget {
   final int id;
@@ -25,12 +23,7 @@ class Hymn extends StatelessWidget {
               IconButton(
                   onPressed: () => provider.addToFavorites(
                       hymn: hymn, title: title, context: context, id: id),
-                  icon: Icon(
-                    Hive.box(favourites).containsKey(id)
-                        ? LineIcons.heartAlt
-                        : LineIcons.heart,
-                    color: Colors.white,
-                  ))
+                  icon: ActionBarIcon(index: id))
             ],
           ),
           body: Container(

@@ -25,7 +25,7 @@ class About extends StatelessWidget {
                 arrowColor: Colors.pink,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.fitHeight,
                         image: AssetImage('assets/images/logo.jpg'))),
                 accountName: Text('AAFM Hymns'),
                 accountEmail: Text('')),

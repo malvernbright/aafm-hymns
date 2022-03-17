@@ -7,11 +7,13 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'models/favourites.dart';
+import 'models/hymn_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory documents = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(documents.path);
+  Hive.registerAdapter(HymnsModelAdapter());
   Hive.registerAdapter(FavouriteHymnsAdapter());
   // await Hive.openBox(darkModeBox);
   await Hive.openBox(favourites);

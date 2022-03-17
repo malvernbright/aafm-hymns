@@ -28,8 +28,8 @@ class HymnProvider with ChangeNotifier {
     } else {
       filteredUsers = users
           .where((u) => (u.id.toString().contains(value) ||
-              u.title!.toLowerCase().contains(value.toLowerCase()) ||
-              u.hymn!.toLowerCase().contains(value.toLowerCase())))
+              u.title.toLowerCase().contains(value.toLowerCase()) ||
+              u.hymn.toLowerCase().contains(value.toLowerCase())))
           .toList();
     }
     notifyListeners();

@@ -2,7 +2,6 @@ import 'package:aafm_hymns/models/favourites.dart';
 import 'package:aafm_hymns/pages/hymn.dart';
 import 'package:aafm_hymns/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class Favourites extends StatelessWidget {
@@ -37,7 +36,7 @@ class Favourites extends StatelessWidget {
                                             title: hymns.title,
                                             hymn: hymns.hymn, id: hymns.id,
                                             // index: index,
-                                          ))),
+                                          ),),),
                             ),
                           );
                         }),

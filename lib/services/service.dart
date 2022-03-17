@@ -9,6 +9,7 @@ class Services {
   static Future<List<HymnsModel>> getUsers() async {
     try {
       final jsonData = await rootBundle.loadString('assets/hymns/hymns.json');
+      // var list = HymnsModel.fromJson(jsonData);
       List<HymnsModel> list = parseHymns(jsonData);
       return list;
     } catch (e) {

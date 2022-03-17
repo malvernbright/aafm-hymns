@@ -64,10 +64,12 @@ class SearchBarWidget extends StatelessWidget {
                           itemBuilder: (context, index) {
                             int parsedId = int.parse(
                                 '${provider.filteredUsers.isEmpty ? provider.users[index].id : provider.filteredUsers[index].id}');
-                            String title =
-                                '${provider.filteredUsers.isEmpty ? provider.users[index].title : provider.filteredUsers[index].title}';
-                            String hymn =
-                                '${provider.filteredUsers.isEmpty ? provider.users[index].hymn : provider.filteredUsers[index].hymn}';
+                            String title = provider.filteredUsers.isEmpty
+                                ? provider.users[index].title
+                                : provider.filteredUsers[index].title;
+                            String hymn = provider.filteredUsers.isEmpty
+                                ? provider.users[index].hymn
+                                : provider.filteredUsers[index].hymn;
                             return Card(
                               child: ListTile(
                                   leading: CircleAvatar(
@@ -128,10 +130,12 @@ class SearchBarWidget extends StatelessWidget {
                           itemBuilder: (context, index) {
                             int parsedId = int.parse(
                                 '${provider.filteredUsers.isEmpty ? provider.users[index].id : provider.filteredUsers[index].id}');
-                            String title =
-                                '${provider.filteredUsers.isEmpty ? provider.users[index].title : provider.filteredUsers[index].title}';
-                            String hymn =
-                                '${provider.filteredUsers.isEmpty ? provider.users[index].hymn : provider.filteredUsers[index].hymn}';
+                            String title = provider.filteredUsers.isEmpty
+                                ? provider.users[index].title
+                                : provider.filteredUsers[index].title;
+                            String hymn = provider.filteredUsers.isEmpty
+                                ? provider.users[index].hymn
+                                : provider.filteredUsers[index].hymn;
                             return Card(
                               child: ListTile(
                                   leading: CircleAvatar(

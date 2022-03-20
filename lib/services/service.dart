@@ -4,9 +4,7 @@ import 'package:aafm_hymns/models/hymn_model.dart';
 import 'package:flutter/services.dart';
 
 class Services {
-  static const String url = 'https://jsonplaceholder.typicode.com/users';
-
-  static Future<List<HymnsModel>> getUsers() async {
+  static Future<List<HymnsModel>> getHymnsList() async {
     try {
       final jsonData = await rootBundle.loadString('assets/hymns/hymns.json');
       // var list = HymnsModel.fromJson(jsonData);

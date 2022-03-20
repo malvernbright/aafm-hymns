@@ -10,11 +10,11 @@ import 'package:hive/hive.dart';
 class HymnProvider with ChangeNotifier {
   double myFontSize = 14.0;
   TextEditingController searchController = TextEditingController();
-  List<HymnsModel> users = [];
-  List<HymnsModel> filteredUsers = [];
+  List<HymnsModel> hymnsList = [];
+  List<HymnsModel> filteredHymnsList = [];
   int selectedIndex = 0;
 
-  Future<List<HymnsModel>> readJsonData() async {
+  Future<List<HymnsModel>> readJsonHymnData() async {
     // Read json file to list
     final jsonData = await rootBundle.loadString('assets/hymns/hymns.json');
     final list = json.decode(jsonData) as List<dynamic>;
@@ -24,9 +24,9 @@ class HymnProvider with ChangeNotifier {
 
   void onSearchChanged(String value) {
     if (value.isEmpty) {
-      filteredUsers = users;
+      filteredHymnsList = hymnsList;
     } else {
-      filteredUsers = users
+      filteredHymnsList = hymnsList
           .where((u) => (u.id.toString().contains(value) ||
               u.title.toLowerCase().contains(value.toLowerCase()) ||
               u.hymn.toLowerCase().contains(value.toLowerCase())))

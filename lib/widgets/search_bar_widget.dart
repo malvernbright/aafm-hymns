@@ -58,18 +58,18 @@ class SearchBarWidget extends StatelessWidget {
                       elevation: 4.0,
                       child: ListView.builder(
                           shrinkWrap: true,
-                          itemCount: provider.filteredUsers.isEmpty
-                              ? provider.users.length
-                              : provider.filteredUsers.length,
+                          itemCount: provider.filteredHymnsList.isEmpty
+                              ? provider.hymnsList.length
+                              : provider.filteredHymnsList.length,
                           itemBuilder: (context, index) {
                             int parsedId = int.parse(
-                                '${provider.filteredUsers.isEmpty ? provider.users[index].id : provider.filteredUsers[index].id}');
-                            String title = provider.filteredUsers.isEmpty
-                                ? provider.users[index].title
-                                : provider.filteredUsers[index].title;
-                            String hymn = provider.filteredUsers.isEmpty
-                                ? provider.users[index].hymn
-                                : provider.filteredUsers[index].hymn;
+                                '${provider.filteredHymnsList.isEmpty ? provider.hymnsList[index].id : provider.filteredHymnsList[index].id}');
+                            String title = provider.filteredHymnsList.isEmpty
+                                ? provider.hymnsList[index].title
+                                : provider.filteredHymnsList[index].title;
+                            String hymn = provider.filteredHymnsList.isEmpty
+                                ? provider.hymnsList[index].hymn
+                                : provider.filteredHymnsList[index].hymn;
                             return Card(
                               child: ListTile(
                                   leading: CircleAvatar(
@@ -124,18 +124,18 @@ class SearchBarWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 50),
                       child: ListView.builder(
                           shrinkWrap: true,
-                          itemCount: provider.filteredUsers.isEmpty
-                              ? provider.users.length
-                              : provider.filteredUsers.length,
+                          itemCount: provider.filteredHymnsList.isEmpty
+                              ? provider.hymnsList.length
+                              : provider.filteredHymnsList.length,
                           itemBuilder: (context, index) {
                             int parsedId = int.parse(
-                                '${provider.filteredUsers.isEmpty ? provider.users[index].id : provider.filteredUsers[index].id}');
-                            String title = provider.filteredUsers.isEmpty
-                                ? provider.users[index].title
-                                : provider.filteredUsers[index].title;
-                            String hymn = provider.filteredUsers.isEmpty
-                                ? provider.users[index].hymn
-                                : provider.filteredUsers[index].hymn;
+                                '${provider.filteredHymnsList.isEmpty ? provider.hymnsList[index].id : provider.filteredHymnsList[index].id}');
+                            String title = provider.filteredHymnsList.isEmpty
+                                ? provider.hymnsList[index].title
+                                : provider.filteredHymnsList[index].title;
+                            String hymn = provider.filteredHymnsList.isEmpty
+                                ? provider.hymnsList[index].hymn
+                                : provider.filteredHymnsList[index].hymn;
                             return Card(
                               child: ListTile(
                                   leading: CircleAvatar(

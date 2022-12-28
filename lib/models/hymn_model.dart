@@ -1,22 +1,16 @@
-import 'package:hive/hive.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'hymn_model.freezed.dart';
 part 'hymn_model.g.dart';
 
-@HiveType(typeId: 1)
-class HymnsModel extends HiveObject {
-  @HiveField(0)
-  int id;
-  @HiveField(1)
-  String title;
-  @HiveField(2)
-  String hymn;
-  HymnsModel({required this.id, required this.title, required this.hymn});
+@freezed
+class HymnsModel with _$HymnsModel {
+  const factory HymnsModel({
+    int? id,
+    required String title,
+    required String hymn,
+  }) = _HymnsModel;
 
-  factory HymnsModel.fromJson(Map<String, dynamic> json) {
-    return HymnsModel(
-      id: json['id'],
-      title: json['title'],
-      hymn: json['hymn'],
-    );
-  }
+  factory HymnsModel.fromJson(Map<String, dynamic> json) =>
+      _$HymnsModelFromJson(json);
 }

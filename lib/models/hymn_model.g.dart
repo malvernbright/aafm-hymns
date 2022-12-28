@@ -3,45 +3,19 @@
 part of 'hymn_model.dart';
 
 // **************************************************************************
-// TypeAdapterGenerator
+// JsonSerializableGenerator
 // **************************************************************************
 
-class HymnsModelAdapter extends TypeAdapter<HymnsModel> {
-  @override
-  final int typeId = 1;
-
-  @override
-  HymnsModel read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return HymnsModel(
-      id: fields[0] as int,
-      title: fields[1] as String,
-      hymn: fields[2] as String,
+_$_HymnsModel _$$_HymnsModelFromJson(Map<String, dynamic> json) =>
+    _$_HymnsModel(
+      id: json['id'] as int?,
+      title: json['title'] as String,
+      hymn: json['hymn'] as String,
     );
-  }
 
-  @override
-  void write(BinaryWriter writer, HymnsModel obj) {
-    writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.title)
-      ..writeByte(2)
-      ..write(obj.hymn);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is HymnsModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
+Map<String, dynamic> _$$_HymnsModelToJson(_$_HymnsModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'hymn': instance.hymn,
+    };

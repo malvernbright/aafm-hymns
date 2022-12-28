@@ -30,13 +30,15 @@ class Favourites extends StatelessWidget {
                           return Card(
                             child: ListTile(
                               title: Text(hymns.title.toString()),
-                              onTap: () =>
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => Hymn(
-                                            title: hymns.title,
-                                            hymn: hymns.hymn, id: hymns.id,
-                                            // index: index,
-                                          ),),),
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => Hymn(
+                                    title: hymns.title,
+                                    hymn: hymns.hymn, id: hymns.id!,
+                                    // index: index,
+                                  ),
+                                ),
+                              ),
                             ),
                           );
                         }),

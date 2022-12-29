@@ -7,16 +7,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class HymnsRepository {
   /// Throws [HymnsNotLoadedException]
   Future<List<HymnsModel>> fetchHymns();
+  void onSearchChanged(String value);
 }
 
 class HymnsRepositoryImpl implements HymnsRepository {
+  List<HymnsModel> hymns = [];
+  List<HymnsModel> filteredHymns = [];
+
   @override
   Future<List<HymnsModel>> fetchHymns() async {
-    final jsonString = await rootBundle.loadString('assets/hymns/hymns.json');
-    final hymnsMap = jsonDecode(jsonString);
-    final hymns = hymnsMap.map((json) => HymnsModel.fromJson(json));
-    print(hymns);
-    return hymns;
+    // Read json file to list
+    final jsonData = await rootBundle.loadString('assets/hymns/hymns.json');
+    final list = json.decode(jsonData) as List<dynamic>;
+    return list.map((e) => HymnsModel.fromJson(e)).toList();
+  }
+
+  @override
+  void onSearchChanged(String value) {
+    if (value.isEmpty) {
+      filteredHymns = hymns;
+    } else {
+      filteredHymns = hymns
+          .where((u) => (u.id.toString().contains(value) ||
+              u.title.toLowerCase().contains(value.toLowerCase()) ||
+              u.hymn.toLowerCase().contains(value.toLowerCase())))
+          .toList();
+    }
   }
 }
 

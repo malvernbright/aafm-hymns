@@ -8,7 +8,7 @@ part of 'hymn_model.dart';
 
 _$_HymnsModel _$$_HymnsModelFromJson(Map<String, dynamic> json) =>
     _$_HymnsModel(
-      id: json['id'] as int?,
+      id: json['id'] as String,
       title: json['title'] as String,
       hymn: json['hymn'] as String,
     );

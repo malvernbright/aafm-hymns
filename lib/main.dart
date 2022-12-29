@@ -16,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Directory documents = await path_provider.getApplicationDocumentsDirectory();
   // await Hive.openBox(darkModeBox);
-  await Hive.openBox(favourites);
+  // await Hive.openBox(favourites);
   runApp(MultiRepositoryProvider(
     providers: [
       RepositoryProvider(

@@ -10,7 +10,7 @@ class ActionBarIcon extends StatelessWidget {
     required this.index,
   }) : super(key: key);
 
-  final int index;
+  final String index;
 
   @override
   Widget build(BuildContext context) {

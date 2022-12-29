@@ -53,10 +53,10 @@ class HymnProvider with ChangeNotifier {
   void addToFavorites(
       {required String title,
       required String hymn,
-      required int id,
+      required String id,
       required BuildContext context}) async {
     var box = await Hive.openBox(favourites);
-    var favouriteHymns = FavouriteHymns(title: title, hymn: hymn);
+    var favouriteHymns = FavouriteHymns(title: title, hymn: hymn, id: id);
     if (box.containsKey(id)) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('$title is no longer in your favourites list')));

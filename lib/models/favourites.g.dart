@@ -8,7 +8,7 @@ part of 'favourites.dart';
 
 _$_FavouriteHymns _$$_FavouriteHymnsFromJson(Map<String, dynamic> json) =>
     _$_FavouriteHymns(
-      id: json['id'] as int?,
+      id: json['id'] as String,
       title: json['title'] as String,
       hymn: json['hymn'] as String,
     );

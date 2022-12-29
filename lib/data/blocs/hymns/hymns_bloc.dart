@@ -12,11 +12,14 @@ class HymnsBloc extends Bloc<HymnsEvent, HymnsState> {
   HymnsBloc({required this.hymnsRepositoryImpl}) : super(HymnsInitial()) {
     on<LoadHymnsEvent>((event, emit) async {
       emit(HymnsInitial());
+      print("Emitted initial state");
       try {
         final hymns = await hymnsRepositoryImpl.fetchHymns();
-        emit(HymnsLoadedState(hymns: hymns));
+        emit(HymnsLoadedState(hymns: hymns, hymnsChanged: ''));
+        print('Emitted HymnsLoaded State');
       } catch (e) {
         emit(HymnsErrorState(error: e.toString()));
+        print("Emitted error state: $e");
       }
     });
   }

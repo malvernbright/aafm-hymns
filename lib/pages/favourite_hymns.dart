@@ -34,7 +34,7 @@ class Favourites extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (_) => Hymn(
                                     title: hymns.title,
-                                    hymn: hymns.hymn, id: hymns.id!,
+                                    hymn: hymns.hymn, id: hymns.id,
                                     // index: index,
                                   ),
                                 ),

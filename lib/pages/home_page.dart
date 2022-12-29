@@ -24,61 +24,60 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () => onWillPop(context),
-      child: Consumer<HymnProvider>(
-        builder: (context, provider, child) {
-          return Scaffold(
-            body: Center(
-              child: _widgetOptions.elementAt(provider.selectedIndex),
-            ),
-            bottomNavigationBar: Container(
-              decoration: BoxDecoration(
-                color: Colors.green,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 20,
-                    color: Colors.black.withOpacity(.1),
-                  )
-                ],
+      child: Scaffold(
+        body: Center(
+          child: _widgetOptions.elementAt(0
+              // provider.selectedIndex,
               ),
-              child: SafeArea(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-                  child: GNav(
-                    rippleColor: Colors.grey[300]!,
-                    hoverColor: Colors.grey[100]!,
-                    gap: 8,
-                    activeColor: Colors.pink,
-                    iconSize: 24,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
-                    duration: const Duration(milliseconds: 400),
-                    tabBackgroundColor: Colors.grey[100]!,
-                    color: Colors.white,
-                    tabs: const [
-                      GButton(
-                        icon: LineIcons.school,
-                        text: 'Hymns',
-                      ),
-                      GButton(
-                        icon: LineIcons.heart,
-                        text: 'Likes',
-                      ),
-                      GButton(
-                        icon: LineIcons.infoCircle,
-                        text: 'About',
-                      ),
-                    ],
-                    selectedIndex: provider.selectedIndex,
-                    onTabChange: (index) {
-                      provider.onTabChanged(index);
-                    },
+        ),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.green,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 20,
+                color: Colors.black.withOpacity(.1),
+              )
+            ],
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+              child: GNav(
+                rippleColor: Colors.grey[300]!,
+                hoverColor: Colors.grey[100]!,
+                gap: 8,
+                activeColor: Colors.pink,
+                iconSize: 24,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                duration: const Duration(milliseconds: 400),
+                tabBackgroundColor: Colors.grey[100]!,
+                color: Colors.white,
+                tabs: const [
+                  GButton(
+                    icon: LineIcons.school,
+                    text: 'Hymns',
                   ),
-                ),
+                  GButton(
+                    icon: LineIcons.heart,
+                    text: 'Likes',
+                  ),
+                  GButton(
+                    icon: LineIcons.infoCircle,
+                    text: 'About',
+                  ),
+                ],
+                selectedIndex: 0,
+                // provider.selectedIndex,
+                onTabChange: (index) {
+                  // provider.onTabChanged(index);
+                },
               ),
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

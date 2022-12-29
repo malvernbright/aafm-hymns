@@ -6,7 +6,7 @@ part 'favourites.g.dart';
 @freezed
 class FavouriteHymns with _$FavouriteHymns {
   const factory FavouriteHymns({
-    int? id,
+    required String id,
     required String title,
     required String hymn,
   }) = _FavouriteHymns;

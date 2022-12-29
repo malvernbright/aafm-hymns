@@ -6,7 +6,7 @@ part 'hymn_model.g.dart';
 @freezed
 class HymnsModel with _$HymnsModel {
   const factory HymnsModel({
-    int? id,
+    required String id,
     required String title,
     required String hymn,
   }) = _HymnsModel;

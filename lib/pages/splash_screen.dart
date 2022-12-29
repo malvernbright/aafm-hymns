@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
-    var _duration = const Duration(seconds: 6);
+    var _duration = const Duration(seconds: 2);
 
     return Timer(_duration, navigationPage);
   }

@@ -20,7 +20,7 @@ HymnsModel _$HymnsModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$HymnsModel {
-  int? get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get hymn => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $HymnsModelCopyWith<$Res> {
           HymnsModel value, $Res Function(HymnsModel) then) =
       _$HymnsModelCopyWithImpl<$Res, HymnsModel>;
   @useResult
-  $Res call({int? id, String title, String hymn});
+  $Res call({String id, String title, String hymn});
 }
 
 /// @nodoc
@@ -52,15 +52,15 @@ class _$HymnsModelCopyWithImpl<$Res, $Val extends HymnsModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? title = null,
     Object? hymn = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -81,7 +81,7 @@ abstract class _$$_HymnsModelCopyWith<$Res>
       __$$_HymnsModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String title, String hymn});
+  $Res call({String id, String title, String hymn});
 }
 
 /// @nodoc
@@ -95,15 +95,15 @@ class __$$_HymnsModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? title = null,
     Object? hymn = null,
   }) {
     return _then(_$_HymnsModel(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -119,13 +119,14 @@ class __$$_HymnsModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_HymnsModel implements _HymnsModel {
-  const _$_HymnsModel({this.id, required this.title, required this.hymn});
+  const _$_HymnsModel(
+      {required this.id, required this.title, required this.hymn});
 
   factory _$_HymnsModel.fromJson(Map<String, dynamic> json) =>
       _$$_HymnsModelFromJson(json);
 
   @override
-  final int? id;
+  final String id;
   @override
   final String title;
   @override
@@ -166,7 +167,7 @@ class _$_HymnsModel implements _HymnsModel {
 
 abstract class _HymnsModel implements HymnsModel {
   const factory _HymnsModel(
-      {final int? id,
+      {required final String id,
       required final String title,
       required final String hymn}) = _$_HymnsModel;
 
@@ -174,7 +175,7 @@ abstract class _HymnsModel implements HymnsModel {
       _$_HymnsModel.fromJson;
 
   @override
-  int? get id;
+  String get id;
   @override
   String get title;
   @override

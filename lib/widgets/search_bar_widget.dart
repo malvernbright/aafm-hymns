@@ -1,4 +1,4 @@
-import 'package:aafm_hymns/pages/hymn.dart';
+import 'package:aafm_hymns/pages/hymn_page.dart';
 import 'package:aafm_hymns/providers/hymn_provider.dart';
 import 'package:aafm_hymns/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +102,7 @@ class SearchBarWidget extends StatelessWidget {
                                   onTap: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (_) => Hymn(
+                                        builder: (_) => HymnPage(
                                           title: title = title,
                                           hymn: hymn,
                                           id: parsedId,
@@ -158,7 +158,7 @@ class SearchBarWidget extends StatelessWidget {
                                   onTap: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (_) => Hymn(
+                                        builder: (_) => HymnPage(
                                           title: title = title,
                                           hymn: hymn,
                                           id: parsedId,

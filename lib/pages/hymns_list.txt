@@ -1,0 +1,196 @@
+import 'package:aafm_hymns/models/hymn_model.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+
+import '../data/blocs/hymns/hymns_bloc.dart';
+import '../data/repositories/hymns_repository.dart';
+import '../utils/constants.dart';
+import 'hymn_page.dart';
+import 'search_page.dart';
+
+class HymnsList extends StatelessWidget {
+  const HymnsList({Key? key}) : super(key: key);
+  static TextEditingController searchController =
+      TextEditingController(text: '');
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: Hive.openBox(favourites),
+        builder: (_, snapshot) {
+          if (snapshot.hasData) {
+            return BlocProvider(
+              create: (context) => HymnsBloc(
+                hymnsRepositoryImpl:
+                    RepositoryProvider.of<HymnsRepositoryImpl>(context),
+                searchText: searchController.text,
+              )..add(LoadHymnsEvent(searchText: searchController.text)),
+              child: BlocBuilder<HymnsBloc, HymnsState>(
+                builder: (context, state) {
+                  if (state is HymnsInitial) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    );
+                  }
+                  if (state is HymnsLoadedState) {
+                    return Scaffold(
+                      body: Column(
+                        children: [
+                          // Card(
+                          //     child: TextField(
+                          //   controller: searchController,
+                          //   // textAlign: TextAlign.center,
+                          //   onChanged: (value) {
+                          //     value = searchController.text;
+                          //     // value = searchController.text;
+                          //     // final hymnBloc = context.read<HymnsBloc>();
+                          //     // hymnBloc.hymnsRepositoryImpl.fetchHymns(value);
+                          //     // hymnBloc.add(LoadHymnsEvent(searchText: value));
+                          //     RepositoryProvider.of<HymnsRepositoryImpl>(
+                          //             context)
+                          //         .fetchHymns(value);
+                          //   },
+                          //   decoration: InputDecoration(
+                          //     border: InputBorder.none,
+                          //     suffix: IconButton(
+                          //       icon: LineIcon(Icons.clear),
+                          //       onPressed: () {
+                          //         searchController.clear();
+                          //       },
+                          //     ),
+                          //     icon: LineIcon(LineIcons.search,
+                          //         color: Colors.pink.shade300),
+                          //     hintText: 'Search hymn...',
+                          //   ),
+                          // )),
+                          Expanded(
+                            flex: 1,
+                            child: FloatingSearchBar(
+                              hint: 'Search...',
+                              builder: (_, transition) {
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Material(
+                                    color: Colors.white,
+                                    elevation: 4,
+                                    child: ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: state.hymns.length,
+                                        itemBuilder: (context, index) {
+                                          final hymnsRepository =
+                                              RepositoryProvider.of<
+                                                  HymnsRepositoryImpl>(context);
+                                          final loadedHymn = state.hymns[index];
+                                          // String parsedId = state.hymns[index].id;
+                                          // String title = state.hymns[index].title;
+                                          // String hymn = state.hymns[index].hymn;
+                                          return Card(
+                                            child: ListTile(
+                                                leading: CircleAvatar(
+                                                  backgroundColor: Colors.pink,
+                                                  child: Text(
+                                                    loadedHymn.id,
+                                                    style: const TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                                title: Text(loadedHymn.title),
+                                                trailing: IconButton(
+                                                    icon: Icon(
+                                                      Hive.box(favourites)
+                                                              .containsKey(
+                                                                  loadedHymn.id)
+                                                          ? LineIcons.heartAlt
+                                                          : LineIcons.heart,
+                                                      color: Colors.pinkAccent,
+                                                      size: 35,
+                                                    ),
+                                                    onPressed: () {
+                                                      RepositoryProvider.of<
+                                                                  HymnsRepositoryImpl>(
+                                                              context)
+                                                          .addToFavorites(
+                                                              title: loadedHymn
+                                                                  .title,
+                                                              hymn: loadedHymn
+                                                                  .hymn,
+                                                              id: loadedHymn
+                                                                  .id);
+                                                      if (Hive.box(favourites)
+                                                          .containsKey(
+                                                              loadedHymn.id)) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                                '${loadedHymn.title} was removed from your favourites 🤔'),
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                                '${loadedHymn.title} was added to your favourites 🐣'),
+                                                          ),
+                                                        );
+                                                      }
+                                                    }),
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                      builder: (_) => HymnPage(
+                                                        title: loadedHymn.title,
+                                                        hymn: loadedHymn.hymn,
+                                                        id: loadedHymn.id,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
+                                          );
+                                        }),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      // floatingActionButton: FloatingActionButton(
+                      //   onPressed: () => Navigator.of(context).push(
+                      //       MaterialPageRoute(
+                      //           builder: (_) => const SearchPage())),
+                      //   child: LineIcon(LineIcons.search),
+                      // ),
+                    );
+                  }
+                  if (state is HymnsErrorState) {
+                    return Center(
+                      child: Column(
+                        children: [
+                          const Icon(LineIcons.android),
+                          Text(state.error),
+                        ],
+                      ),
+                    );
+                  }
+                  return Container();
+                },
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return const Center(child: Icon(Icons.error_outline));
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        });
+  }
+}

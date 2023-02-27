@@ -10,18 +10,22 @@ class HymnsInitial extends HymnsState {
 }
 
 class HymnsLoadedState extends HymnsState {
-  final String hymnsChanged;
   final List<HymnsModel> hymns;
 
-  const HymnsLoadedState({required this.hymnsChanged, required this.hymns});
+  const HymnsLoadedState({required this.hymns});
   @override
-  List<Object> get props => [hymns, hymnsChanged];
+  List<Object> get props => [hymns];
 }
 
-class HymnsSearchChangedState extends HymnsState {
-  const HymnsSearchChangedState();
+class HymnAddToFavoriteState extends HymnsState {
+  final String title;
+  final String hymn;
+  final String id;
+
+  const HymnAddToFavoriteState(
+      {required this.title, required this.hymn, required this.id});
   @override
-  List<Object> get props => [];
+  List<Object> get props => [title, hymn, id];
 }
 
 class HymnsErrorState extends HymnsState {

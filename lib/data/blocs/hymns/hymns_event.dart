@@ -5,14 +5,9 @@ abstract class HymnsEvent extends Equatable {
 }
 
 class LoadHymnsEvent extends HymnsEvent {
-  @override
-  List<Object> get props => [];
-}
+  final String searchText;
 
-class ChangedHymnsEvent extends HymnsEvent {
-  final String changedString;
-
-  const ChangedHymnsEvent({required this.changedString});
+  const LoadHymnsEvent({required this.searchText});
   @override
-  List<Object> get props => [changedString];
+  List<Object> get props => [searchText];
 }

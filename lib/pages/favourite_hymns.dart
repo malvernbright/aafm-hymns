@@ -1,5 +1,5 @@
 import 'package:aafm_hymns/models/favourites.dart';
-import 'package:aafm_hymns/pages/hymn.dart';
+import 'package:aafm_hymns/pages/hymn_page.dart';
 import 'package:aafm_hymns/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -14,9 +14,6 @@ class Favourites extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
-              appBar: AppBar(
-                title: const Text('Favourites'),
-              ),
               body: ValueListenableBuilder(
                 valueListenable: Hive.box(favourites).listenable(),
                 builder: (context, Box favouritesBox, _) {
@@ -29,10 +26,14 @@ class Favourites extends StatelessWidget {
                               favouritesBox.getAt(index) as FavouriteHymns;
                           return Card(
                             child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.pink,
+                                child: Text(hymns.id),
+                              ),
                               title: Text(hymns.title.toString()),
                               onTap: () => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (_) => Hymn(
+                                  builder: (_) => HymnPage(
                                     title: hymns.title,
                                     hymn: hymns.hymn, id: hymns.id,
                                     // index: index,

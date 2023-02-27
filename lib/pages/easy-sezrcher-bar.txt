@@ -1,0 +1,14 @@
+
+                        appBar: EasySearchBar(
+                          title: const Text('AAFM HYMNS'),
+                          onSearch: (value) {
+                            RepositoryProvider.of<HymnsRepositoryImpl>(context)
+                                .onSearchChanged(value);
+                          },
+                          backgroundColor: Colors.green,
+                          titleTextStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                          searchBackgroundColor: Colors.grey[300],
+                        ),

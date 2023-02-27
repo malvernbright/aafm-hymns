@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text('Remember to turn focus mode on! Avoid disruptions 🙂'),
     ));
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomePage()));
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
   }
 }

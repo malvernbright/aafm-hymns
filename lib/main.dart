@@ -25,6 +25,9 @@ void main() async {
       },
       title: 'AAFM HYMNS',
       theme: ThemeData(
+          useMaterial3: true,
+          primaryColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
               .copyWith(secondary: Colors.pink),
           textSelectionTheme: TextSelectionThemeData(

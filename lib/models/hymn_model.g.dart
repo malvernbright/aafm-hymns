@@ -17,7 +17,7 @@ class HymnsModelAdapter extends TypeAdapter<HymnsModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return HymnsModel(
-      id: fields[0] as int,
+      id: fields[0] as String,
       title: fields[1] as String,
       hymn: fields[2] as String,
     );

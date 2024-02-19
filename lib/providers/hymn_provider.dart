@@ -1,39 +1,25 @@
-import 'dart:convert';
 
 import 'package:aafm_hymns/models/favourites.dart';
 import 'package:aafm_hymns/models/hymn_model.dart';
+import 'package:aafm_hymns/services/service.dart';
 import 'package:aafm_hymns/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
 
 class HymnProvider with ChangeNotifier {
   double myFontSize = 14.0;
   TextEditingController searchController = TextEditingController();
-  List<HymnsModel> hymnsList = [];
-  List<HymnsModel> filteredHymnsList = [];
+  late Future<List<HymnsModel>> hymnsList;
+  late Future<List<HymnsModel>> filteredHymnsList;
   int selectedIndex = 0;
 
-  Future<List<HymnsModel>> readJsonHymnData() async {
-    // Read json file to list
-    final jsonData = await rootBundle.loadString('assets/hymns/hymns.json');
-    final list = json.decode(jsonData) as List<dynamic>;
 
-    return list.map((e) => HymnsModel.fromJson(e)).toList();
-  }
+  Future<List<HymnsModel>> get getHymnsList => Services.getHymnsList();
 
-  void onSearchChanged(String value) {
-    if (value.isEmpty) {
-      filteredHymnsList = hymnsList;
-    } else {
-      filteredHymnsList = hymnsList
-          .where((u) => (u.id.toString().contains(value) ||
-              u.title.toLowerCase().contains(value.toLowerCase()) ||
-              u.hymn.toLowerCase().contains(value.toLowerCase())))
-          .toList();
-    }
-    notifyListeners();
+  Future<List<HymnsModel>> onSearchChanged(String value) {
+    return Services.searchHymn(value).whenComplete(() => notifyListeners());
   }
+  
 
   void increaseFontSize() {
     myFontSize++;

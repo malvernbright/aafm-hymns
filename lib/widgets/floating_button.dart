@@ -18,14 +18,14 @@ class FloatingButton extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () => provider.increaseFontSize(),
-                icon: LineIcon(
+                icon: const LineIcon(
                   LineIcons.plusCircle,
                   color: Colors.green,
                   size: 35,
                 )),
             IconButton(
                 onPressed: () => provider.reduceFontSize(),
-                icon: LineIcon(
+                icon: const LineIcon(
                   LineIcons.minusCircle,
                   color: Colors.pink,
                   size: 35,

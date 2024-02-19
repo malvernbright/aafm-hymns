@@ -35,9 +35,9 @@ class About extends StatelessWidget {
                 subtitle: 'Stand No. 10369\nZororo Section, Highfield'),
             Card(
               child: GestureDetector(
-                child: ListTile(
+                child: const ListTile(
                     leading: LineIcon(LineIcons.code),
-                    title: const Text('Developer')),
+                    title: Text('Developer')),
                 onTap: () {
                   buildShowBottomSheet(context);
                 },

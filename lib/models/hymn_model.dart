@@ -5,7 +5,7 @@ part 'hymn_model.g.dart';
 @HiveType(typeId: 1)
 class HymnsModel extends HiveObject {
   @HiveField(0)
-  int id;
+  String id;
   @HiveField(1)
   String title;
   @HiveField(2)

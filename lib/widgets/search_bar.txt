@@ -1,0 +1,62 @@
+ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Material(
+              color: Colors.white,
+              elevation: 4.0,
+              child: Container(
+                padding: const EdgeInsets.only(top: 50),
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: provider.filteredHymnsList.isEmpty
+                        ? provider.hymnsList.length
+                        : provider.filteredHymnsList.length,
+                    itemBuilder: (context, index) {
+                      int parsedId = int.parse(
+                          provider.filteredHymnsList.isEmpty
+                              ? provider.hymnsList[index].id
+                              : provider.filteredHymnsList[index].id);
+                      String title = provider.filteredHymnsList.isEmpty
+                          ? provider.hymnsList[index].title
+                          : provider.filteredHymnsList[index].title;
+                      String hymn = provider.filteredHymnsList.isEmpty
+                          ? provider.hymnsList[index].hymn
+                          : provider.filteredHymnsList[index].hymn;
+                      return Card(
+                        child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.pink,
+                              child: Text(
+                                '$parsedId',
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            title: Text(title),
+                            trailing: IconButton(
+                              icon: Icon(
+                                Hive.box(favourites).containsKey(index + 1)
+                                    ? LineIcons.heartAlt
+                                    : LineIcons.heart,
+                                color: Colors.pinkAccent,
+                                size: 35,
+                              ),
+                              onPressed: () => provider.addToFavorites(
+                                  hymn: hymn,
+                                  title: title,
+                                  context: context,
+                                  id: parsedId),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => Hymn(
+                                    title: title = title,
+                                    hymn: hymn,
+                                    id: parsedId,
+                                  ),
+                                ),
+                              );
+                            }),
+                      );
+                    }),
+              )),
+        )

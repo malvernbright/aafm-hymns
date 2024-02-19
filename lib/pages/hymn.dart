@@ -27,6 +27,7 @@ class Hymn extends StatelessWidget {
             ],
           ),
           body: Container(
+            color: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             width: MediaQuery.of(context).size.width,
             child: SelectableText(

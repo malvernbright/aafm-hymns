@@ -1,10 +1,11 @@
-
 import 'package:aafm_hymns/models/favourites.dart';
 import 'package:aafm_hymns/models/hymn_model.dart';
 import 'package:aafm_hymns/services/service.dart';
 import 'package:aafm_hymns/utils/constants.dart';
+import 'package:aafm_hymns/widgets/lovely_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class HymnProvider with ChangeNotifier {
   double myFontSize = 14.0;
@@ -13,13 +14,11 @@ class HymnProvider with ChangeNotifier {
   late Future<List<HymnsModel>> filteredHymnsList;
   int selectedIndex = 0;
 
-
   Future<List<HymnsModel>> get getHymnsList => Services.getHymnsList();
 
   Future<List<HymnsModel>> onSearchChanged(String value) {
     return Services.searchHymn(value).whenComplete(() => notifyListeners());
   }
-  
 
   void increaseFontSize() {
     myFontSize++;
@@ -36,23 +35,32 @@ class HymnProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addToFavorites(
-      {required String title,
-      required String hymn,
-      required int id,
-      required BuildContext context}) async {
-    var box = await Hive.openBox(favourites);
-    var favouriteHymns = FavouriteHymns(id, title, hymn);
+  void addToFavorites({
+    required String title,
+    required String hymn,
+    required int id,
+    required context,
+  }) async {
+    final box = await Hive.openBox(favourites);
+    final favouriteHymns = FavouriteHymns(id, title, hymn);
     if (box.containsKey(id)) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('$title is no longer in your favourites list')));
+      LovelySnackBar.showSnackBar(
+        title: 'Success!',
+        message: '$title is no longer in your favourites list',
+        context: context,
+        contentType: ContentType.success,
+      );
       box.delete(id);
 
       notifyListeners();
     } else {
       box.put(id, favouriteHymns);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('You\'ve added $title to your favourites list')));
+      LovelySnackBar.showSnackBar(
+        title: 'Success!',
+        message: 'You\'ve added $title to your favourites list',
+        context: context,
+        contentType: ContentType.success,
+      );
 
       notifyListeners();
     }

@@ -49,8 +49,7 @@ class About extends StatelessWidget {
     );
   }
 
-  PersistentBottomSheetController<dynamic> buildShowBottomSheet(
-      BuildContext context) {
+  buildShowBottomSheet(BuildContext context) {
     return showBottomSheet(
         context: context,
         builder: (_) => Container(
@@ -67,8 +66,8 @@ class About extends StatelessWidget {
                 children: [
                   const AboutCard(
                     icon: LineIcons.phone,
-                    cardText: '+263 712 772 812',
-                    subtitle: '',
+                    cardText: '+263 714 072 135',
+                    subtitle: '+263 782 628 137',
                   ),
                   const AboutCard(
                     icon: LineIcons.envelopeAlt,

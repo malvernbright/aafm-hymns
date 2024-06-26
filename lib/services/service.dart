@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:aafm_hymns/models/hymn_model.dart';
 import 'package:flutter/services.dart';
@@ -38,5 +40,12 @@ class Services {
   static List<HymnsModel> parseHymns(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<HymnsModel>((json) => HymnsModel.fromJson(json)).toList();
+  }
+
+  static Future<String> readFile(String hymn) async {
+    final file = File(hymn);
+    final hymnString = await file.readAsString();
+    log(hymnString);
+    return hymnString;
   }
 }

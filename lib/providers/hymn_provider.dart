@@ -65,4 +65,8 @@ class HymnProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<String> getHymn(String hymn) {
+    return Services.readFile(hymn);
+  }
 }

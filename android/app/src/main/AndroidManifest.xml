@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mglazycoder.aafm_hymns">
+    package="zw.co.mglazycoder.aafm_hymns">
    <application
         android:label="AAFM HYMNS"
         android:icon="@mipmap/ic_launcher">

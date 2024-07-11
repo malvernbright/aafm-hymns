@@ -1,3 +1,4 @@
+import 'package:aafm_hymns/pages/readings.dart';
 import 'package:aafm_hymns/providers/hymn_provider.dart';
 import 'package:aafm_hymns/widgets/exit_app.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatelessWidget {
   static const List<Widget> _widgetOptions = <Widget>[
     HymnsList(),
     Favourites(),
+    // Readings(),
     About(),
   ];
 
@@ -22,8 +24,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => onWillPop(context),
+    return PopScope(
+      onPopInvoked: (pop) => onWillPop(context),
       child: Consumer<HymnProvider>(
         builder: (context, provider, child) {
           return Scaffold(
@@ -55,6 +57,7 @@ class HomePage extends StatelessWidget {
                     duration: const Duration(milliseconds: 400),
                     tabBackgroundColor: Colors.grey[100]!,
                     color: Colors.white,
+                    style: GnavStyle.google,
                     tabs: const [
                       GButton(
                         icon: LineIcons.school,
@@ -64,6 +67,10 @@ class HomePage extends StatelessWidget {
                         icon: LineIcons.heart,
                         text: 'Likes',
                       ),
+                      // GButton(
+                      //   icon: LineIcons.school,
+                      //   text: 'Readings',
+                      // ),
                       GButton(
                         icon: LineIcons.infoCircle,
                         text: 'About',

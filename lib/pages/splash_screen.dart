@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
-    var duration = const Duration(seconds: 6);
+    var duration = const Duration(seconds: 3);
 
     return Timer(duration, navigationPage);
   }
@@ -47,7 +47,6 @@ class _SplashScreenState extends State<SplashScreen> {
               ],
               // waveDuration: const Duration(seconds: 5),
               // boxBackgroundColor: Colors.white,
-              
             )
           ],
         ),
@@ -56,9 +55,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Remember to turn focus mode on! Avoid disruptions 🙂'),
-    ));
+    // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+    //   content: Text('Remember to turn focus mode on! Avoid disruptions 🙂'),
+    // ));
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const HomePage()));
   }

@@ -40,17 +40,19 @@ class Hymn extends StatelessWidget {
                           icon: ActionBarIcon(index: id))
                     ],
                   ),
-                  body: Container(
-                      color: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      width: MediaQuery.of(context).size.width,
-                      child: FormattedText(snapshot.data!)
-                      // SelectableText(
-                      //   widget.hymn,
-                      //   style: TextStyle(fontSize: provider.myFontSize),
-                      // ),
-                      ),
+                  body: SingleChildScrollView(
+                    child: Container(
+                        color: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        width: MediaQuery.of(context).size.width,
+                        child: FormattedText(snapshot.data!)
+                        // SelectableText(
+                        //   widget.hymn,
+                        //   style: TextStyle(fontSize: provider.myFontSize),
+                        // ),
+                        ),
+                  ),
                   // floatingActionButton: const FloatingButton(),
                 );
               } else {

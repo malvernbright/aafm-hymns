@@ -27,20 +27,46 @@ class About extends StatelessWidget {
                     image: DecorationImage(
                         fit: BoxFit.fitHeight,
                         image: AssetImage('assets/images/logo.jpg'))),
-                accountName: Text('AAFM Hymns'),
+                accountName: Text(''),
                 accountEmail: Text('')),
             const AboutCard(
                 icon: LineIcons.church,
                 cardText: 'Central Tabernacle & HQ',
                 subtitle: 'Stand No. 10369\nZororo Section, Highfield'),
-            Card(
-              child: GestureDetector(
-                child: const ListTile(
-                    leading: LineIcon(LineIcons.code),
-                    title: Text('Developer')),
-                onTap: () {
-                  buildShowBottomSheet(context);
-                },
+            const Divider(
+              color: Color.fromARGB(255, 255, 1, 1),
+              indent: 6,
+              endIndent: 6,
+              thickness: 1,
+            ),
+            Text(
+              'Developer',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 192, 188, 188),
+                  borderRadius: BorderRadius.circular(10)),
+              child: const Flexible(
+                child: Column(
+                  children: [
+                    AboutCard(
+                      icon: LineIcons.phone,
+                      cardText: '+263 714 072 135',
+                      subtitle: '+263 782 628 137',
+                    ),
+                    AboutCard(
+                      icon: LineIcons.envelopeAlt,
+                      cardText: 'malvern@malvernbright.co.zw',
+                      subtitle: 'developer@malvernbright.co.zw',
+                    ),
+                    AboutCard(
+                      icon: LineIcons.googleLogo,
+                      cardText: 'https://malvernbright.co.zw',
+                      subtitle: 'https://bytesphere.co.zw',
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

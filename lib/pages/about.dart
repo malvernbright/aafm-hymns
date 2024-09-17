@@ -40,7 +40,7 @@ class About extends StatelessWidget {
               thickness: 1,
             ),
             Text(
-              'Developer',
+              'About',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Container(
@@ -50,6 +50,11 @@ class About extends StatelessWidget {
               child: const Flexible(
                 child: Column(
                   children: [
+                    AboutCard(
+                      icon: LineIcons.user,
+                      cardText: 'Developer',
+                      subtitle: 'Malvern Gondo',
+                    ),
                     AboutCard(
                       icon: LineIcons.phone,
                       cardText: '+263 714 072 135',
@@ -63,7 +68,7 @@ class About extends StatelessWidget {
                     AboutCard(
                       icon: LineIcons.googleLogo,
                       cardText: 'https://malvernbright.co.zw',
-                      subtitle: 'https://bytesphere.co.zw',
+                      subtitle: '',
                     ),
                   ],
                 ),

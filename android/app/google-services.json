@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "53676145999",
+    "project_id": "aafm-hymns",
+    "storage_bucket": "aafm-hymns.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53676145999:android:f08276ce1ab64adda8993a",
+        "android_client_info": {
+          "package_name": "zw.co.mglazycoder.aafm_hymns"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk2nSepotE1om4b_amFZJ_ak6f4-N1U_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

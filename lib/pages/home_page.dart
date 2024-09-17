@@ -1,7 +1,8 @@
-import 'package:aafm_hymns/pages/readings.dart';
 import 'package:aafm_hymns/providers/hymn_provider.dart';
+import 'package:aafm_hymns/utils/constants.dart';
 import 'package:aafm_hymns/widgets/exit_app.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -10,9 +11,16 @@ import 'about.dart';
 import 'favourite_hymns.dart';
 import 'hymns_list.dart';
 
-class HomePage extends StatelessWidget {
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  // static const TextStyle optionStyle =
+  //     TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
     HymnsList(),
     Favourites(),
@@ -20,12 +28,45 @@ class HomePage extends StatelessWidget {
     About(),
   ];
 
-  const HomePage({Key? key}) : super(key: key);
+  BannerAd? bannerAd;
+  bool isLoaded = false;
+
+  /// Loads a banner ad.
+  void loadAd() {
+    bannerAd = BannerAd(
+      adUnitId: adUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          debugPrint('$ad loaded.');
+          setState(() {
+            isLoaded = true;
+          });
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (ad, err) {
+          debugPrint('BannerAd failed to load: $err');
+          // Dispose the ad here to free resources.
+          ad.dispose();
+        },
+      ),
+    )..load();
+  }
+
+  @override
+  void initState() {
+    loadAd();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (pop) => onWillPop(context),
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) =>
+          onWillPop(context),
       child: Consumer<HymnProvider>(
         builder: (context, provider, child) {
           return Scaffold(

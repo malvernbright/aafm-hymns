@@ -30,6 +30,8 @@ class _HomePageState extends State<HomePage> {
 
   BannerAd? bannerAd;
   bool isLoaded = false;
+  final String adUnit = 'ca-app-pub-3940256099942544/6300978111';
+  late Widget adWidget;
 
   /// Loads a banner ad.
   void loadAd() {
@@ -58,6 +60,20 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     loadAd();
+    if (bannerAd != null) {
+      adWidget = Align(
+        alignment: Alignment.bottomCenter,
+        child: SafeArea(
+          child: SizedBox(
+            width: bannerAd!.size.width.toDouble(),
+            height: bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: bannerAd!),
+          ),
+        ),
+      );
+    } else {
+      adWidget = const SizedBox.shrink();
+    }
     super.initState();
   }
 
@@ -70,60 +86,67 @@ class _HomePageState extends State<HomePage> {
       child: Consumer<HymnProvider>(
         builder: (context, provider, child) {
           return Scaffold(
-            body: Center(
-              child: _widgetOptions.elementAt(provider.selectedIndex),
-            ),
-            bottomNavigationBar: Container(
-              decoration: BoxDecoration(
-                color: Colors.green,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 20,
-                    color: Colors.black.withOpacity(.1),
-                  )
-                ],
+            body: SafeArea(
+              child: Center(
+                child: _widgetOptions.elementAt(provider.selectedIndex),
               ),
-              child: SafeArea(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-                  child: GNav(
-                    rippleColor: Colors.grey[300]!,
-                    hoverColor: Colors.grey[100]!,
-                    gap: 8,
-                    activeColor: Colors.pink,
-                    iconSize: 24,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
-                    duration: const Duration(milliseconds: 400),
-                    tabBackgroundColor: Colors.grey[100]!,
-                    color: Colors.white,
-                    style: GnavStyle.google,
-                    tabs: const [
-                      GButton(
-                        icon: LineIcons.school,
-                        text: 'Hymns',
-                      ),
-                      GButton(
-                        icon: LineIcons.heart,
-                        text: 'Likes',
-                      ),
-                      // GButton(
-                      //   icon: LineIcons.school,
-                      //   text: 'Readings',
-                      // ),
-                      GButton(
-                        icon: LineIcons.infoCircle,
-                        text: 'About',
-                      ),
+            ),
+            bottomNavigationBar: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                adWidget,
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 20,
+                        color: Colors.black.withOpacity(.1),
+                      )
                     ],
-                    selectedIndex: provider.selectedIndex,
-                    onTabChange: (index) {
-                      provider.onTabChanged(index);
-                    },
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 8),
+                    child: GNav(
+                      rippleColor: Colors.grey[300]!,
+                      hoverColor: Colors.grey[100]!,
+                      gap: 8,
+                      activeColor: Colors.pink,
+                      iconSize: 24,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 12),
+                      duration: const Duration(milliseconds: 400),
+                      tabBackgroundColor: Colors.grey[100]!,
+                      color: Colors.white,
+                      style: GnavStyle.google,
+                      tabs: const [
+                        GButton(
+                          icon: LineIcons.school,
+                          text: 'Hymns',
+                        ),
+                        GButton(
+                          icon: LineIcons.heart,
+                          text: 'Likes',
+                        ),
+                        // GButton(
+                        //   icon: LineIcons.school,
+                        //   text: 'Readings',
+                        // ),
+                        GButton(
+                          icon: LineIcons.infoCircle,
+                          text: 'About',
+                        ),
+                      ],
+                      selectedIndex: provider.selectedIndex,
+                      onTabChange: (index) {
+                        provider.onTabChanged(index);
+                      },
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           );
         },

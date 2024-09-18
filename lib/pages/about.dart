@@ -39,39 +39,37 @@ class About extends StatelessWidget {
               endIndent: 6,
               thickness: 1,
             ),
-            Text(
-              'About',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
             Container(
               decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 192, 188, 188),
                   borderRadius: BorderRadius.circular(10)),
-              child: const Flexible(
-                child: Column(
-                  children: [
-                    AboutCard(
-                      icon: LineIcons.user,
-                      cardText: 'Developer',
-                      subtitle: 'Malvern Gondo',
-                    ),
-                    AboutCard(
-                      icon: LineIcons.phone,
-                      cardText: '+263 714 072 135',
-                      subtitle: '+263 782 628 137',
-                    ),
-                    AboutCard(
-                      icon: LineIcons.envelopeAlt,
-                      cardText: 'malvern@malvernbright.co.zw',
-                      subtitle: 'developer@malvernbright.co.zw',
-                    ),
-                    AboutCard(
-                      icon: LineIcons.googleLogo,
-                      cardText: 'https://malvernbright.co.zw',
-                      subtitle: '',
-                    ),
-                  ],
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    'About',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  AboutCard(
+                    icon: LineIcons.user,
+                    cardText: 'Developer',
+                    subtitle: 'Malvern Gondo',
+                  ),
+                  AboutCard(
+                    icon: LineIcons.phone,
+                    cardText: '+263 714 072 135',
+                    subtitle: '+263 782 628 137',
+                  ),
+                  AboutCard(
+                    icon: LineIcons.envelopeAlt,
+                    cardText: 'malvern@malvernbright.co.zw',
+                    subtitle: 'developer@malvernbright.co.zw',
+                  ),
+                  AboutCard(
+                    icon: LineIcons.googleLogo,
+                    cardText: 'https://malvernbright.co.zw',
+                    subtitle: '',
+                  ),
+                ],
               ),
             ),
           ],
@@ -110,7 +108,7 @@ class About extends StatelessWidget {
                     cardText: 'https://malvernbright.co.zw',
                     subtitle: '',
                   ),
-                  ButtonBar(
+                  OverflowBar(
                     children: [
                       MaterialButton(
                           color: Colors.white,

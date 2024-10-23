@@ -1,7 +1,10 @@
 import 'package:aafm_hymns/providers/hymn_provider.dart';
+import 'package:aafm_hymns/utils/colors.dart';
 import 'package:aafm_hymns/utils/constants.dart';
+import 'package:aafm_hymns/widgets/app_button.dart';
 import 'package:aafm_hymns/widgets/exit_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -79,10 +82,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
+    return PopScope<Object?>(
       canPop: false,
-      onPopInvokedWithResult: (bool didPop, Object? result) =>
-          onWillPop(context),
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) {
+          return;
+        }
+        final bool shouldPop = await ExitApp.exitApp(context);
+        if (context.mounted && shouldPop) {
+          SystemNavigator.pop();
+        }
+      },
       child: Consumer<HymnProvider>(
         builder: (context, provider, child) {
           return Scaffold(
@@ -152,5 +162,32 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     );
+  }
+
+  Future<bool?> _showBackDialog() {
+    return showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Are you sure?'),
+            content: const Text('Are you sure you want to exit?'),
+            actions: [
+              AppButton(
+                text: 'Never mind',
+                color: AppColors.red,
+                onTap: () {
+                  Navigator.pop(context, false);
+                },
+              ),
+              AppButton(
+                text: 'Yes',
+                color: AppColors.bluishWhite,
+                onTap: () {
+                  SystemNavigator.pop();
+                },
+              )
+            ],
+          );
+        });
   }
 }

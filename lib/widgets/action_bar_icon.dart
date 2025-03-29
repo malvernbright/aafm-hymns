@@ -7,9 +7,9 @@ import '../utils/constants.dart';
 
 class ActionBarIcon extends StatelessWidget {
   const ActionBarIcon({
-    Key? key,
+    super.key,
     required this.index,
-  }) : super(key: key);
+  });
 
   final String index;
 

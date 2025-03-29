@@ -1,38 +1,23 @@
-import 'dart:convert';
-
 import 'package:aafm_hymns/models/favourites.dart';
 import 'package:aafm_hymns/models/hymn_model.dart';
+import 'package:aafm_hymns/services/service.dart';
 import 'package:aafm_hymns/utils/constants.dart';
+import 'package:aafm_hymns/widgets/lovely_snackbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class HymnProvider with ChangeNotifier {
   double myFontSize = 14.0;
   TextEditingController searchController = TextEditingController();
-  List<HymnsModel> users = [];
-  List<HymnsModel> filteredUsers = [];
+  late Future<List<HymnsModel>> hymnsList;
+  late Future<List<HymnsModel>> filteredHymnsList;
   int selectedIndex = 0;
 
-  Future<List<HymnsModel>> readJsonData() async {
-    // Read json file to list
-    final jsonData = await rootBundle.loadString('assets/hymns/hymns.json');
-    final list = json.decode(jsonData) as List<dynamic>;
+  Future<List<HymnsModel>> get getHymnsList => Services.getHymnsList();
 
-    return list.map((e) => HymnsModel.fromJson(e)).toList();
-  }
-
-  void onSearchChanged(String value) {
-    if (value.isEmpty) {
-      filteredUsers = users;
-    } else {
-      filteredUsers = users
-          .where((u) => (u.id.toString().contains(value) ||
-              u.title.toLowerCase().contains(value.toLowerCase()) ||
-              u.hymn.toLowerCase().contains(value.toLowerCase())))
-          .toList();
-    }
-    notifyListeners();
+  Future<List<HymnsModel>> onSearchChanged(String value) {
+    return Services.searchHymn(value).whenComplete(() => notifyListeners());
   }
 
   void increaseFontSize() {
@@ -50,25 +35,38 @@ class HymnProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addToFavorites(
-      {required String title,
-      required String hymn,
-      required String id,
-      required BuildContext context}) async {
-    var box = await Hive.openBox(favourites);
-    var favouriteHymns = FavouriteHymns(title: title, hymn: hymn, id: id);
+  void addToFavorites({
+    required String title,
+    required String hymn,
+    required int id,
+    required context,
+  }) async {
+    final box = await Hive.openBox(favourites);
+    final favouriteHymns = FavouriteHymns(id, title, hymn);
     if (box.containsKey(id)) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('$title is no longer in your favourites list')));
+      LovelySnackBar.showSnackBar(
+        title: 'Success!',
+        message: '$title is no longer in your favourites list',
+        context: context,
+        contentType: ContentType.success,
+      );
       box.delete(id);
 
       notifyListeners();
     } else {
       box.put(id, favouriteHymns);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('You\'ve added $title to your favourites list')));
+      LovelySnackBar.showSnackBar(
+        title: 'Success!',
+        message: 'You\'ve added $title to your favourites list',
+        context: context,
+        contentType: ContentType.success,
+      );
 
       notifyListeners();
     }
+  }
+
+  Future<String> getHymn(String hymn) {
+    return Services.readFile(hymn);
   }
 }

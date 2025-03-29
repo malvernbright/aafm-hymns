@@ -1,0 +1,2 @@
+/Users/malverngondo/Desktop/Work/Mobile/aafm-hymns/android/app/.cxx/RelWithDebInfo/1d245k49/x86/CMakeFiles/edit_cache.dir
+/Users/malverngondo/Desktop/Work/Mobile/aafm-hymns/android/app/.cxx/RelWithDebInfo/1d245k49/x86/CMakeFiles/rebuild_cache.dir

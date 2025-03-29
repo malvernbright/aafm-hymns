@@ -1,14 +1,18 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:aafm_hymns/models/hymn_model.dart';
 import 'package:flutter/services.dart';
 
 class Services {
-  static const String url = 'https://jsonplaceholder.typicode.com/users';
-
-  static Future<List<HymnsModel>> getUsers() async {
+  static const String _hymnsAsset = 'assets/hymns/hymns.json';
+  static String get hymnsBundle => _hymnsAsset;
+  late List<HymnsModel> hymnsList;
+  late List<HymnsModel> filteredHymnsList;
+  static Future<List<HymnsModel>> getHymnsList() async {
     try {
-      final jsonData = await rootBundle.loadString('assets/hymns/hymns.json');
+      final jsonData = await rootBundle.loadString(hymnsBundle);
       // var list = HymnsModel.fromJson(jsonData);
       List<HymnsModel> list = parseHymns(jsonData);
       return list;
@@ -17,8 +21,31 @@ class Services {
     }
   }
 
+  static Future<List<HymnsModel>> searchHymn(String value) async {
+    value = value.toLowerCase();
+    try {
+      final jsonData = await rootBundle.loadString(hymnsBundle);
+      List<HymnsModel> list = parseHymns(jsonData);
+      var hymns = list
+          .where((element) => (element.id.contains(value) ||
+              element.title.toLowerCase().contains(value) ||
+              element.hymn.toLowerCase().contains(value)))
+          .toList();
+      return hymns;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   static List<HymnsModel> parseHymns(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<HymnsModel>((json) => HymnsModel.fromJson(json)).toList();
+  }
+
+  static Future<String> readFile(String hymn) async {
+    final file = File(hymn);
+    final hymnString = await file.readAsString();
+    log(hymnString);
+    return hymnString;
   }
 }

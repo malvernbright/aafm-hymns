@@ -3,89 +3,82 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 
 class About extends StatelessWidget {
-  const About({Key? key}) : super(key: key);
+  const About({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * .9,
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(10), bottomRight: Radius.circular(10))),
-      // width: MediaQuery.of(context).size.width * .75,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          const UserAccountsDrawerHeader(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              arrowColor: Colors.pink,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.contain,
-                      image: AssetImage('assets/images/logo.jpg'))),
-              accountName: Text('AAFM Hymns'),
-              accountEmail: Text('')),
-          const AboutCard(
-              icon: LineIcons.church,
-              cardText: 'Central Tabernacle & HQ',
-              subtitle: 'Stand No. 10369\nZororo Section, Highfield'),
-          Card(
-            child: GestureDetector(
-              child: ListTile(
-                  leading: LineIcon(LineIcons.code),
-                  title: const Text('Developer')),
-              onTap: () {
-                showDeveloperInfo(context);
-              },
+    return SafeArea(
+      child: Container(
+        width: MediaQuery.of(context).size.width * .9,
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(10),
+                bottomRight: Radius.circular(10))),
+        // width: MediaQuery.of(context).size.width * .75,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const UserAccountsDrawerHeader(
+                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                arrowColor: Colors.pink,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fitHeight,
+                        image: AssetImage('assets/images/logo.jpg'))),
+                accountName: Text(''),
+                accountEmail: Text('')),
+            const AboutCard(
+                icon: LineIcons.church,
+                cardText: 'Central Tabernacle & HQ',
+                subtitle: 'Stand No. 10369\nZororo Section, Highfield'),
+            const Divider(
+              color: Color.fromARGB(255, 255, 1, 1),
+              indent: 6,
+              endIndent: 6,
+              thickness: 1,
             ),
-          ),
-        ],
+            Container(
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 192, 188, 188),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Column(
+                children: [
+                  Text(
+                    'About',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  const AboutCard(
+                    icon: LineIcons.user,
+                    cardText: 'Developer',
+                    subtitle: 'Malvern Gondo',
+                  ),
+                  const AboutCard(
+                    icon: LineIcons.phone,
+                    cardText: '+263 714 072 135',
+                    subtitle: '+263 782 628 137',
+                  ),
+                  const AboutCard(
+                    icon: LineIcons.envelopeAlt,
+                    cardText: 'malvern@malvernbright.co.zw',
+                    subtitle: 'developer@malvernbright.co.zw',
+                  ),
+                  const AboutCard(
+                    icon: LineIcons.googleLogo,
+                    cardText: 'https://malvernbright.co.zw',
+                    subtitle: '',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  void showDeveloperInfo(context) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-            title: const Text(
-              'About Developer',
-              textAlign: TextAlign.center,
-            ),
-            children: [
-              const AboutCard(
-                icon: LineIcons.phone,
-                cardText: '+263 782 628 137',
-                subtitle: '',
-              ),
-              const AboutCard(
-                icon: LineIcons.envelopeAlt,
-                cardText: 'malvern@malvernbright.co.zw',
-                subtitle: '',
-              ),
-              const AboutCard(
-                icon: LineIcons.globeWithAfricaShown,
-                cardText: 'https://malvernbright.co.zw',
-                subtitle: '',
-              ),
-              ButtonBar(
-                children: [
-                  MaterialButton(
-                      color: Colors.white,
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('Dismiss'))
-                ],
-              )
-            ],
-          );
-        });
-  }
-
-  PersistentBottomSheetController<dynamic> buildShowBottomSheet(
-      BuildContext context) {
+  buildShowBottomSheet(BuildContext context) {
     return showBottomSheet(
         context: context,
         builder: (_) => Container(
@@ -102,8 +95,8 @@ class About extends StatelessWidget {
                 children: [
                   const AboutCard(
                     icon: LineIcons.phone,
-                    cardText: '+263 712 772 812',
-                    subtitle: '',
+                    cardText: '+263 714 072 135',
+                    subtitle: '+263 782 628 137',
                   ),
                   const AboutCard(
                     icon: LineIcons.envelopeAlt,
@@ -115,7 +108,7 @@ class About extends StatelessWidget {
                     cardText: 'https://malvernbright.co.zw',
                     subtitle: '',
                   ),
-                  ButtonBar(
+                  OverflowBar(
                     children: [
                       MaterialButton(
                           color: Colors.white,
@@ -131,11 +124,11 @@ class About extends StatelessWidget {
 
 class AboutCard extends StatelessWidget {
   const AboutCard({
-    Key? key,
+    super.key,
     required this.icon,
     required this.cardText,
     required this.subtitle,
-  }) : super(key: key);
+  });
   final IconData icon;
   final String cardText;
   final String subtitle;

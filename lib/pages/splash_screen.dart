@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
   startTime() async {
-    var _duration = const Duration(seconds: 2);
+    var duration = const Duration(seconds: 3);
 
-    return Timer(_duration, navigationPage);
+    return Timer(duration, navigationPage);
   }
 
   @override
@@ -36,13 +36,17 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.asset('assets/images/logo.jpg'),
             const SizedBox(height: 50),
-            TextLiquidFill(
-              text: 'AAFM Hymns',
-              waveColor: Colors.green,
-              loadDuration: const Duration(seconds: 6),
-              waveDuration: const Duration(seconds: 5),
-              boxBackgroundColor: Colors.white,
-              textStyle: const TextStyle(fontFamily: 'Fruktur', fontSize: 60),
+            AnimatedTextKit(
+              animatedTexts: [
+                TypewriterAnimatedText(
+                  'AAFM Hymns',
+                  speed: const Duration(milliseconds: 90),
+                  textStyle: const TextStyle(
+                      fontFamily: 'Fruktur', fontSize: 50, color: Colors.green),
+                )
+              ],
+              // waveDuration: const Duration(seconds: 5),
+              // boxBackgroundColor: Colors.white,
             )
           ],
         ),
@@ -51,10 +55,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text('Remember to turn focus mode on! Avoid disruptions 🙂'),
-    ));
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => HomePage()));
+    // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+    //   content: Text('Remember to turn focus mode on! Avoid disruptions 🙂'),
+    // ));
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const HomePage()));
   }
 }

@@ -6,9 +6,9 @@ import 'package:line_icons/line_icons.dart';
 
 class ActionBarIcon extends StatelessWidget {
   const ActionBarIcon({
-    Key? key,
+    super.key,
     required this.index,
-  }) : super(key: key);
+  });
 
   final int index;
 

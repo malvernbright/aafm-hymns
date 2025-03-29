@@ -3,7 +3,7 @@ import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 
 class About extends StatelessWidget {
-  const About({Key? key}) : super(key: key);
+  const About({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,22 +49,22 @@ class About extends StatelessWidget {
                     'About',
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  AboutCard(
+                  const AboutCard(
                     icon: LineIcons.user,
                     cardText: 'Developer',
                     subtitle: 'Malvern Gondo',
                   ),
-                  AboutCard(
+                  const AboutCard(
                     icon: LineIcons.phone,
                     cardText: '+263 714 072 135',
                     subtitle: '+263 782 628 137',
                   ),
-                  AboutCard(
+                  const AboutCard(
                     icon: LineIcons.envelopeAlt,
                     cardText: 'malvern@malvernbright.co.zw',
                     subtitle: 'developer@malvernbright.co.zw',
                   ),
-                  AboutCard(
+                  const AboutCard(
                     icon: LineIcons.googleLogo,
                     cardText: 'https://malvernbright.co.zw',
                     subtitle: '',
@@ -124,11 +124,11 @@ class About extends StatelessWidget {
 
 class AboutCard extends StatelessWidget {
   const AboutCard({
-    Key? key,
+    super.key,
     required this.icon,
     required this.cardText,
     required this.subtitle,
-  }) : super(key: key);
+  });
   final IconData icon;
   final String cardText;
   final String subtitle;

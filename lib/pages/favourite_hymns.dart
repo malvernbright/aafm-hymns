@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class Favourites extends StatelessWidget {
-  const Favourites({Key? key}) : super(key: key);
+  const Favourites({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +30,15 @@ class Favourites extends StatelessWidget {
                           return Card(
                             child: ListTile(
                               title: Text(hymns.title.toString()),
-                              onTap: () =>
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => Hymn(
-                                            title: hymns.title,
-                                            hymn: hymns.hymn, id: hymns.id,
-                                            // index: index,
-                                          ),),),
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => Hymn(
+                                    title: hymns.title,
+                                    hymn: hymns.hymn, id: hymns.id,
+                                    // index: index,
+                                  ),
+                                ),
+                              ),
                             ),
                           );
                         }),

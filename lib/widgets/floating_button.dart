@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 
 class FloatingButton extends StatelessWidget {
   const FloatingButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

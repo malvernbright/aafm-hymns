@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Readings extends StatelessWidget {
-  const Readings({Key? key}) : super(key: key);
+  const Readings({super.key});
 
   @override
   Widget build(BuildContext context) {

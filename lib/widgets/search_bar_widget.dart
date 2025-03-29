@@ -9,7 +9,7 @@ import 'package:material_floating_search_bar_2/material_floating_search_bar_2.da
 import 'package:provider/provider.dart';
 
 class SearchBarWidget extends StatefulWidget {
-  const SearchBarWidget({Key? key}) : super(key: key);
+  const SearchBarWidget({super.key});
 
   @override
   State<SearchBarWidget> createState() => _SearchBarWidgetState();

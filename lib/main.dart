@@ -8,23 +8,15 @@ import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'models/favourites.dart';
 import 'models/hymn_model.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:firebase_core/firebase_core.dart';
-
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
   Directory documents = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(documents.path);
   Hive.registerAdapter(HymnsModelAdapter());
   Hive.registerAdapter(FavouriteHymnsAdapter());
   // await Hive.openBox(darkModeBox);
   await Hive.openBox(favourites);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   runApp(ChangeNotifierProvider(
     create: (BuildContext context) => HymnProvider(),
     child: MaterialApp(

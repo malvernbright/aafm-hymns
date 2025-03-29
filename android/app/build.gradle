@@ -34,8 +34,8 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "zw.co.mglazycoder.aafm_hymns"
-    compileSdkVersion 34
-    // compileSdk 34
+    compileSdk 35
+    compileSdkVersion 35
     ndkVersion flutter.ndkVersion
 
     compileOptions {

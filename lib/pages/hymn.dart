@@ -11,11 +11,11 @@ class Hymn extends StatelessWidget {
   final String title;
   final String hymn;
   const Hymn({
-    Key? key,
+    super.key,
     required this.title,
     required this.hymn,
     required this.id,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
